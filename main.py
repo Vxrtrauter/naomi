@@ -6,9 +6,9 @@ from data.state import naomi
 
 def start_shell():
     while True:
-        cmd = input("shell>")
+        cmd = input("naomi> ")
         if cmd == "":
-            cmd = input("shell>")
+            cmd = input("naomi> ")
         if cmd == "list":
             list_connections()
         elif "select" in cmd:
