@@ -21,4 +21,4 @@ while True:
         output_str = str(output_byte, "utf-8")
 
         currentdir = os.getcwd() + "> "
-        s.send(str.encode(output_str) + currentdir)
+        s.send(str.encode(output_str + currentdir))
