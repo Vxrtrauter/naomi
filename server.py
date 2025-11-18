@@ -62,9 +62,9 @@ def accept_connections():
 
 
 def start_shell():
-    cmd = input("shell>")
-
     while True:
+        cmd = input("shell>")
+
         if cmd == "list":
             list_connections()
 
@@ -79,7 +79,6 @@ def start_shell():
 
 def list_connections():
     results = ""
-    selectId = 0
 
     for i, connection in enumerate(connections):
         try:
@@ -102,8 +101,6 @@ def get_target(cmd):
         connection = connections[target]
         print(f"[i] Connected to {str(addresses[target][0])}")
         print(str(addresses[target][0]) + ">", end="")
-
-
         return connection
 
     except:
@@ -152,7 +149,7 @@ def create_jobs():
     for x in JOB_NUMBER:
         queue.put(x)
 
-    queue.join
+    queue.join()
 
 
 
