@@ -1,6 +1,23 @@
 from data.state import naomi
+from network.socket.connections import refresh_connections
 
+def start_shell():
+    from interface.cli import banner
+    print(banner)
+    while True:
+        cmd = input("naomi> ")
+        if cmd == "":
+            cmd = input("naomi> ")
+        if cmd == "bot list":
+            conn = refresh_connections()
+            print(f"Connected Bots: {conn}")
 
+        elif "select" in cmd:
+            connection = get_target(cmd)
+            if connection != None:
+                send_target_commands(connection)
+        elif cmd != "":
+            print(f"Invalid Command: {cmd}")
 
 def get_target(cmd):
     try:

@@ -21,8 +21,8 @@ def accept_connections():
             print(f"[!] Error accepting connections: {e}")
 
 
-def list_connections():
-    results = ""
+def refresh_connections():
+    # results = ""
 
     for i, connection in enumerate(naomi.connections):
         try:
@@ -33,6 +33,8 @@ def list_connections():
             del naomi.addresses[i]
             continue
 
-        results = str(i) + "   " + str(naomi.addresses[i][0]) + "   " + str(naomi.addresses[i][1]) + "\n"
+    return len(naomi.connections)
 
-    print("---- Clients----\n\n" + results)
+    #     results = str(i) + "   " + str(naomi.addresses[i][0]) + "   " + str(naomi.addresses[i][1]) + "\n"
+
+    # print("---- Clients----\n\n" + results)
