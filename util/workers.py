@@ -10,5 +10,4 @@ def create_workers(target):
 def create_jobs():
     for x in naomi.JOB_NUMBER:
         naomi.queue.put(x)
-
     naomi.queue.join()
